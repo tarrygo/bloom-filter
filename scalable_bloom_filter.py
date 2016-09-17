@@ -1,9 +1,9 @@
 from bloom_filter import BloomFilter
 class ScalableBloomFilter():
 	"""docstring for ScalableBloomFilter"""
-	'SMALL_GROWTH' = 2
-	'LARGE_GROWTH' = 4
-	def __init__(self, expected_inserts, error_rate, mode='SMALL_GROWTH'):
+	SMALL_GROWTH = 2
+	LARGE_GROWTH = 4
+	def __init__(self, expected_inserts, error_rate, mode=SMALL_GROWTH):
 		self.sbfilters = []
 
 		sbfilter = BloomFilter(expected_inserts, error_rate)
@@ -13,12 +13,12 @@ class ScalableBloomFilter():
 
 	def add(self, key):
 		bfilter = self.sbfilters[-1]
-		if !bfilter.can_accomodate:
+		if bfilter.can_accomodate() == False:
 			new_expected_inserts = bfilter.expected_inserts * self.space_scale
 			new_error_rate = bfilter.error_rate * self.error_prob_ratio
 			new_bfilter = BloomFilter(new_expected_inserts, new_error_rate)
-			sbfilters.append(new_bfilter)
-			bfilter = sbfilters
+			self.sbfilters.append(new_bfilter)
+			bfilter = new_bfilter
 		bfilter.add(key)
 
 	def __contains__(self, key):
