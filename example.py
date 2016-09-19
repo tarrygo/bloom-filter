@@ -1,5 +1,5 @@
-from bloom_filter import BloomFilter
-from scalable_bloom_filter import ScalableBloomFilter
+from filters.bloom_filter import BloomFilter
+from filters.scalable_bloom_filter import ScalableBloomFilter
 capacity = 100
 error_rate = 0.01
 bfilter = BloomFilter(capacity, error_rate)

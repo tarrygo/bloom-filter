@@ -1,5 +1,5 @@
 from bitarray import bitarray
-from filters.bloom_spec import BloomSpec
+from bloom_spec import BloomSpec
 import mmh3
 
 class BloomFilter():
@@ -50,6 +50,7 @@ class BloomFilter():
 
 	def clear(self):
 		self.bfilter.setall(False)
+		self.count = 0
 
 	def _calculate_hash(self, key):
 		encoded_key = str(key).encode('utf8')
